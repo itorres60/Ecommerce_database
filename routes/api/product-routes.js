@@ -49,11 +49,17 @@ router.get('/:id', (req, res) => {
         attributes: ['tag_name']
       }
     ]
-  }).then(dbProductData => res.json(dbProductData))
+  }).then(dbProductData => {
+    if (!dbProductData) {
+      res.status(404).json({ message: 'No product found with this id' });
+      return;
+    }
+    res.json(dbProductData);
+  })
     .catch(err => {
     console.log(err);
     res.status(500).json(err);
-    });
+  });
 });
 
 // create new product
@@ -97,6 +103,10 @@ router.put('/:id', (req, res) => {
     },
   })
     .then((product) => {
+      if (!product) {
+        res.status(404).json({ message: 'No product found with this id' });
+        return;
+      } else
       // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
@@ -134,12 +144,12 @@ router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
   Product.destroy({
     where: { id: req.params.id },
-  }).then(dbPostData => {
-    if (!dbPostData) {
-      res.status(404).json({ message: 'No post found with this id' });
+  }).then(dbProductData => {
+    if (!dbProductData) {
+      res.status(404).json({ message: 'No product found with this id' });
       return;
     }
-    res.json(dbPostData);
+    res.json(dbProductData);
   })
   .catch(err => {
     console.log(err);

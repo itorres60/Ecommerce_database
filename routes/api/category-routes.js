@@ -45,11 +45,17 @@ router.get('/:id', (req, res) => {
         ]
       }
     ]
-  }).then(dbCategoryData => res.json(dbCategoryData))
-  .catch(err => {
+  }).then(dbUpdateData => {
+    if (!dbUpdateData) {
+      res.status(404).json({ message: 'No category found with this id' });
+      return;
+    }
+    res.json(dbUpdateData);
+  })
+    .catch(err => {
     console.log(err);
     res.status(500).json(err);
-  })
+  });
 });
 
 router.post('/', (req, res) => {
