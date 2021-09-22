@@ -19,4 +19,6 @@ Error catching and displaying is also utilised in the app so that the end user c
 
 Using Insomnia I am able to demostrate all of the functionalites of this app.  Here is the corresponding video to the demenstration.
 
-https://watch.screencastify.com/v/pJABvFHWkfAE8lvThAe0
+
+
+[Ecommerce website demonstration](https://watch.screencastify.com/v/pJABvFHWkfAE8lvThAe0 "Ecommerce website demonstration")
